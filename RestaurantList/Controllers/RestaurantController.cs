@@ -8,14 +8,14 @@ namespace RestaurantList.Controllers
   public class RestaurantsController : Controller
   {
 
-    [HttpGet("/categories/{cuisineId}/restaurants/new")]
+    [HttpGet("/cuisines/{cuisineId}/restaurants/new")]
     public ActionResult New(int cuisineId)
     {
        Cuisine cuisine = Cuisine.Find(cuisineId);
        return View(cuisine);
     }
 
-    [HttpGet("/categories/{cuisineId}/restaurants/{restaurantId}")]
+    [HttpGet("/cuisines/{cuisineId}/restaurants/{restaurantId}")]
     public ActionResult Show(int cuisineId, int restaurantId)
     {
       Restaurant restaurant = Restaurant.Find(restaurantId);
@@ -33,7 +33,7 @@ namespace RestaurantList.Controllers
       return View();
     }
 
-    [HttpPost("/categories/{cuisineId}/restaurants/{restaurantId}/delete")]
+    [HttpPost("/cuisines/{cuisineId}/restaurants/{restaurantId}/delete")]
     public ActionResult Delete(int cuisineId, int restaurantId)
     {
       Restaurant restaurant = Restaurant.Find(restaurantId);
@@ -45,7 +45,7 @@ namespace RestaurantList.Controllers
       return RedirectToAction("Show", "Cuisines");
     }
 
-    [HttpGet("/categories/{cuisineId}/restaurants/{restaurantId}/edit")]
+    [HttpGet("/cuisines/{cuisineId}/restaurants/{restaurantId}/edit")]
     public ActionResult Edit(int cuisineId, int restaurantId)
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
@@ -56,7 +56,7 @@ namespace RestaurantList.Controllers
       return View(model);
     }
 
-    [HttpPost("/categories/{cuisineId}/restaurants/{restaurantId}")]
+    [HttpPost("/cuisines/{cuisineId}/restaurants/{restaurantId}")]
     public ActionResult Update(int cuisineId, int restaurantId, string newName)
     {
       Restaurant restaurant = Restaurant.Find(restaurantId);
@@ -68,7 +68,7 @@ namespace RestaurantList.Controllers
       return View("Show", model);
     }
 
-    // [HttpGet("/categories/{id}")]
+    // [HttpGet("/cuisines/{id}")]
     // public ActionResult Show(int id)
     // {
     //   Dictionary<string, object> model = new Dictionary<string, object>();

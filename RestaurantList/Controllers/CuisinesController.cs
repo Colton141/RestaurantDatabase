@@ -35,21 +35,21 @@ namespace RestaurantList.Controllers
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
       Cuisine selectedCuisine = Cuisine.Find(id);
-      List<Item> cuisineItems = selectedCuisine.GetRestaurants;
+      List<Restaurant> cuisineRestaurants = selectedCuisine.GetRestaurants();
       model.Add("cuisine", selectedCuisine);
-      model.Add("cuisineItems", cuisineItems);
+      model.Add("cuisineRestaurants", cuisineRestaurants);
       return View(selectedCuisine);
     }
 
-    [HttpPost("/cuisines/{cuisineId}/items")]
+    [HttpPost("/cuisines/{cuisineId}/restaurants")]
     public ActionResult Create(int cuisineId, string restaurantName)
     {
       Cuisine foundCuisine = Cuisine.Find(cuisineId);
-      Item newItem = new Item(restaurantName, cuisineId);
-      newItem.Save();
-      foundCuisine.GetRestaurants;
-      // List<Item> cuisineItems = foundCuisine.GetRestaurants;
-      // model.Add("items", cuisineItems);
+      Restaurant newRestaurant = new Restaurant(restaurantName, cuisineId);
+      newRestaurant.Save();
+      foundCuisine.GetRestaurants();
+      // List<Restaurant> cuisineRestaurants = foundCuisine.GetRestaurants;
+      // model.Add("restaurants", cuisineRestaurants);
       // model.Add("cuisine", foundCuisine);
       return View("Show", foundCuisine);
     }

@@ -1,15 +1,20 @@
-using System;
-using MySql.Data.MySqlClient;
-using RestaurantList;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
-namespace RestaurantList.Models
+namespace RestaurantList
 {
-  public class DB
+  public class Program
   {
-    public static MySqlConnection Connection()
+    public static void Main(string[] args)
     {
-      MySqlConnection conn = new MySqlConnection(DBConfiguration.ConnectionString);
-      return conn;
+      var host = new WebHostBuilder()
+        .UseKestrel()
+        .UseContentRoot(Directory.GetCurrentDirectory())
+        .UseIISIntegration()
+        .UseStartup<Startup>()
+        .Build();
+
+      host.Run();
     }
   }
 }
